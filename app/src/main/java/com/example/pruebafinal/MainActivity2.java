@@ -37,20 +37,34 @@ public class MainActivity2 extends AppCompatActivity {
         poblar();
     }
 
-    private void grabarUsuario(){
-        String user, password,pregunta,respuesta;
+    private void grabarUsuario() {
+        String user, password, pregunta, respuesta;
         user = tilUserR.getEditText().getText().toString();
         password = tilPasswordR.getEditText().getText().toString();
         pregunta = spnPreguntaSecreta.getSelectedItem().toString();
         respuesta = tilRespuestaR.getEditText().getText().toString();
-        if(!user.isEmpty() && !password.isEmpty() && !pregunta.isEmpty() && !respuesta.isEmpty()){
-            registrarUsuario register = new registrarUsuario(user,password,pregunta,respuesta);
 
-            registrarEnBD(register);
-            Toast.makeText(this,"registro exitoso",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this,"FAVOR DE RELLENAR TODOS LOS CAMPOS",Toast.LENGTH_LONG).show();
+        try {
+            AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
+            SQLiteDatabase miBD = adbd.getWritableDatabase();
+            Cursor d = miBD.rawQuery("Select COUNT(*) from usuarios WHERE usuario='" + user + "'", null);
+            d.moveToFirst();
+            int count = d.getInt(0);
+            Log.d("TAG_", " " +  count);
+            if ( count == 0) {
+                if (!user.isEmpty() && !password.isEmpty() && !pregunta.isEmpty() && !respuesta.isEmpty()) {
+                    registrarUsuario register = new registrarUsuario(user, password, pregunta, respuesta);
+                    registrarEnBD(register);
+                    Toast.makeText(this, "registro exitoso", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(this, "FAVOR DE RELLENAR TODOS LOS CAMPOS", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(this, "USUARIO YA EXISTE!", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception ex) {
         }
 
     }
@@ -69,6 +83,7 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
+
             miBD.close();
         }catch (Exception ex){
             Log.e("TAG_", ex.toString());
@@ -83,7 +98,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 grabarUsuario();
-                finish();
+
             }
         });
         btnVolver.setOnClickListener(new View.OnClickListener() {
