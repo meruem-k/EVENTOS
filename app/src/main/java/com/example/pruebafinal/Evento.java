@@ -1,7 +1,8 @@
 package com.example.pruebafinal;
 
+import androidx.annotation.NonNull;
 
-public class registrarEvento {
+public class Evento {
     private String evento;
     private String importancia;
     private String observacion;
@@ -9,13 +10,28 @@ public class registrarEvento {
     private String nombre;
     private Integer Dias;
 
-    public registrarEvento(String evento, String importancia, String observacion, String fechaString, String nombre, Integer dias) {
+    @NonNull
+    @Override
+    public String toString() {
+        return "Evento: " +evento + "\n"
+                + ""+
+                "Importancia: " + importancia+  "\n" +
+                "Observación "+ observacion+" " +"\n" +
+                "Fecha: " + fechaString+"\n" +
+                "Aviso en :" + Dias + " dias.";
+    }
+
+    public Evento(String evento, String importancia, String observacion, String fechaString, String nombre, Integer dias) {
         this.evento = evento;
         this.importancia = importancia;
         this.observacion = observacion;
         this.fechaString = fechaString;
         this.nombre = nombre;
         Dias = dias;
+    }
+
+    public Evento() {
+
     }
 
     public String getEvento() {
