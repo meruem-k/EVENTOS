@@ -43,16 +43,19 @@ public class MainActivity2 extends AppCompatActivity {
         password = tilPasswordR.getEditText().getText().toString();
         pregunta = spnPreguntaSecreta.getSelectedItem().toString();
         respuesta = tilRespuestaR.getEditText().getText().toString();
+        if(!user.isEmpty() && !password.isEmpty() && !pregunta.isEmpty() && !respuesta.isEmpty()){
+            registrarUsuario register = new registrarUsuario(user,password,pregunta,respuesta);
 
-        registrarUsuario register = new registrarUsuario(user,password,pregunta,respuesta);
+            registrarEnBD(register);
+            Toast.makeText(this,"registro exitoso",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this,"FAVOR DE RELLENAR TODOS LOS CAMPOS",Toast.LENGTH_LONG).show();
+        }
 
-        registrarEnBD(register);
-        Toast.makeText(this,"registro exitoso",Toast.LENGTH_SHORT).show();
     }
 
     public void registrarEnBD(registrarUsuario register){
-
-
         try  {
             AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null,1);
             SQLiteDatabase miBD = adbd.getWritableDatabase();
@@ -79,11 +82,7 @@ public class MainActivity2 extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG_","boton registrar");
-                Log.d("TAG_","" + spnPreguntaSecreta.getSelectedItem());
                 grabarUsuario();
-                finish();
-
             }
         });
         btnVolver.setOnClickListener(new View.OnClickListener() {

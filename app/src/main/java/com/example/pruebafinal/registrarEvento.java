@@ -1,5 +1,6 @@
 package com.example.pruebafinal;
 
+
 public class registrarEvento {
     private String evento;
     private String importancia;
