@@ -14,7 +14,7 @@ public class AdministradorBD extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table if not exists usuarios (id_usuario INTEGER primary key autoincrement, usuario text , password text, pregunta TEXT, respuesta text )");
+        db.execSQL("create table if not exists usuarios (id_usuario INTEGER primary key autoincrement, usuario text UNIQUE, password text, pregunta TEXT, respuesta text )");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS eventos (id_evento INTEGER PRIMARY KEY autoincrement, nombre_evento    TEXT, fecha_evento    TEXT, importancia    TEXT, observacion    TEXT, usuario TEXT, RECORDATORIO INTEGER, FOREIGN KEY (usuario) references usuarios (id_usuario))");
     }

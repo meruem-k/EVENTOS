@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
         try {
             AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
             SQLiteDatabase miBD = adbd.getWritableDatabase();
+//miBD.update("usuarios", c, "usuario=?", new String[]{nombre});
+            Cursor c = miBD.rawQuery("Select * from usuarios WHERE usuario='"+user+"'", null);
 
-            Cursor c = miBD.rawQuery("Select * from usuarios ", null);
             if (c.moveToFirst()) {
                 Log.d("TAG_", "Registros recuperados " + c.getCount());
                 do {

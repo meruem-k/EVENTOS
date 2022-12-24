@@ -51,6 +51,7 @@ public class MainActivity4 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+
             }
         });
         btnRecuperar.setOnClickListener(new View.OnClickListener() {
@@ -69,16 +70,16 @@ public class MainActivity4 extends AppCompatActivity {
             AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
             SQLiteDatabase miBD = adbd.getWritableDatabase();
 
-            Cursor c = miBD.rawQuery("Select * from usuarios ", null);
+            Cursor c = miBD.rawQuery("Select * from usuarios WHERE usuario='"+usuario+"'", null);
             if (c.moveToFirst()) {
                 Log.d("TAG_", "Registros recuperados " + c.getCount());
                 Log.d("TAG_",usuario+pregunta+respuesta);
                 do {
-                    if (usuario.equals(c.getString(0)) && pregunta.equals(c.getString(2)) && respuesta.equals(c.getString(3)))
+                    if (usuario.equals(c.getString(1)) && pregunta.equals(c.getString(3)) && respuesta.equals(c.getString(4)))
                     {
                         Log.d("TAG_","Datos correctos");
                         Toast.makeText(this,"Ingreso de datos aceptado!",Toast.LENGTH_SHORT).show();
-                        Intent pantallaReestablecer = new Intent(this, MainActivity8.class);
+                        Intent pantallaReestablecer = new Intent(this, MainActivity9.class);
                         pantallaReestablecer.putExtra("nombreUsuario",usuario);
                         startActivity(pantallaReestablecer);
                     }

@@ -10,8 +10,12 @@ import android.widget.Button;
 public class MainActivity6 extends AppCompatActivity {
     private Button btnVerEventos, btnRegistrar;
 
-
-
+    private void pantallaVisualizarEventos(){
+        String nombre = getIntent().getExtras().getString("nombreUsuario");
+        Intent pantallaregistrarevento = new Intent(this, MainActivity5.class);
+        pantallaregistrarevento.putExtra("nombreUsuario",nombre);
+        startActivity(pantallaregistrarevento);
+    }
 
 
     private void pantallaregistrarevento(){
@@ -20,9 +24,6 @@ public class MainActivity6 extends AppCompatActivity {
         pantallaregistrarevento.putExtra("nombreUsuario",nombre);
         startActivity(pantallaregistrarevento);
     }
-
-
-
 
 
 
@@ -40,6 +41,12 @@ public class MainActivity6 extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { pantallaregistrarevento();
+
+            }
+        });
+        btnVerEventos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {pantallaVisualizarEventos();
 
             }
         });
