@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this, "Ingreso correcto!!", Toast.LENGTH_SHORT).show();
                         miBD.close();
                         Intent pantallaregistrar = new Intent(this, MainActivity6.class);
-                        pantallaregistrar.putExtra("usuario",user);
+                        pantallaregistrar.putExtra("nombreUsuario",user);
                         startActivity(pantallaregistrar);
                     }
                     else if

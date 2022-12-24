@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity6 extends AppCompatActivity {
     private Button btnVerEventos, btnRegistrar;
+    private TextView tvBienvenido;
 
     private void pantallaVisualizarEventos(){
         String nombre = getIntent().getExtras().getString("nombreUsuario");
@@ -34,6 +36,7 @@ public class MainActivity6 extends AppCompatActivity {
     private void referencias(){
         btnRegistrar = findViewById(R.id.btnAgregarEventos);
         btnVerEventos= findViewById(R.id.btnVerEventos);
+        tvBienvenido = findViewById(R.id.tvBienvenido);
 
     }
 
@@ -57,7 +60,9 @@ public class MainActivity6 extends AppCompatActivity {
         setContentView(R.layout.activity_main6);
         referencias();
         eventos();
-        String nombre = getIntent().getExtras().getString("nombreUsuario");
+        String nombre = getIntent().getExtras().getString("nombreUsuario").toUpperCase();
+        String original = tvBienvenido.getText().toString();
+        tvBienvenido.setText(original+ nombre);
     }
 
 
