@@ -60,7 +60,6 @@ public class MainActivity7 extends AppCompatActivity {
         String evento, importancia, observacion;
         String nombre = getIntent().getExtras().getString("nombreUsuario");
         Integer Dias;
-
         evento = tilNombreEvento.getEditText().getText().toString();
         importancia = tilImportancia.getEditText().getText().toString();
         observacion = tilObservacion.getEditText().getText().toString();
@@ -70,7 +69,7 @@ public class MainActivity7 extends AppCompatActivity {
         String fechaString = formateo.format(new Date(fecha));
         Dias = Integer.parseInt(tilDiasAntes.getEditText().getText().toString());
         Log.e("TAG_", String.valueOf(Dias));
-        registrarEvento registro = new registrarEvento (evento, importancia, observacion, fechaString,nombre, Dias);
+        registrarEvento registro = new registrarEvento (evento, importancia, observacion, fechaString, nombre, Dias);
 
 
 
