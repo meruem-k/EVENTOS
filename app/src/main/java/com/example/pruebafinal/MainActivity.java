@@ -28,12 +28,6 @@ public class MainActivity extends AppCompatActivity {
         referencias();
         eventos();
     }
-    private void grabarUsuario(){
-
-
-
-    }
-
 //REFERENCIAS
 
     private void referencias(){
@@ -46,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void pantallaregistrar() {
         Intent pantallaregistrar = new Intent(this, MainActivity2.class);
-        user = tilUser.getEditText().getText().toString();
-        pantallaregistrar.putExtra("nombreUsuario",user);
         startActivity(pantallaregistrar);
     }
     private void login() {
@@ -67,14 +59,15 @@ public class MainActivity extends AppCompatActivity {
                         setError.setText("Rellene todos los campos!");
                         setError.setTextColor(Color.parseColor("#FF0000"));
                     }
-                    else if (user.equals(c.getString(0))  && password.equals(c.getString(1))){
+                    else if (user.equals(c.getString(1))  && password.equals(c.getString(2))){
                         Toast.makeText(this, "Ingreso correcto!!", Toast.LENGTH_SHORT).show();
                         miBD.close();
-                        Intent pantallaregistrar = new Intent(this, MainActivity3.class);
+                        Intent pantallaregistrar = new Intent(this, MainActivity6.class);
+                        pantallaregistrar.putExtra("nombreUsuario",user);
                         startActivity(pantallaregistrar);
                     }
                     else if
-                    (!user.equals(c.getString(0)) || !password.equals(c.getString(1))){
+                    (!user.equals(c.getString(1)) || !password.equals(c.getString(2))){
                         setError.setText("Usuario o contraseña incorrecto!");
                         setError.setTextColor(Color.parseColor("#FF0000"));
                     }
@@ -84,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e("TAG_", ex.toString());
         }
     }
-
+    private void pantallaOlvide(){
+        Intent pantallaOlvide = new Intent(this,MainActivity4.class);
+        startActivity(pantallaOlvide);
+    }
 
 
     private void eventos(){
@@ -105,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("TAG_","boton olvidé");
+                pantallaOlvide();
+
             }
         });
     }

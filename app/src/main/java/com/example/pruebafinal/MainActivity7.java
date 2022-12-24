@@ -38,7 +38,7 @@ public class MainActivity7 extends AppCompatActivity {
     public void registrarEnBD(registrarEvento registro){
 
         try {
-            AdministradorBD adbd = new AdministradorBD(this, "BDAss", null, 2);
+            AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
             SQLiteDatabase miBD = adbd.getWritableDatabase();
             ContentValues reg = new ContentValues();
             reg.put("nombre_evento",registro.getEvento());
@@ -57,19 +57,19 @@ public class MainActivity7 extends AppCompatActivity {
 
 
     private void GrabarEvento (){
-        String evento, importancia, observacion, tilDiasAntes = null;
+        String evento, importancia, observacion;
         String nombre = getIntent().getExtras().getString("nombreUsuario");
         Integer Dias;
-
         evento = tilNombreEvento.getEditText().getText().toString();
         importancia = tilImportancia.getEditText().getText().toString();
         observacion = tilObservacion.getEditText().getText().toString();
+        tilDiasAntes.getEditText().getText().toString();
         long fecha=cvFechaEvento.getDate();
         SimpleDateFormat formateo = new SimpleDateFormat("dd/MM/yyyy");
         String fechaString = formateo.format(new Date(fecha));
-        Dias = Integer.parseInt(tilDiasAntes);
+        Dias = Integer.parseInt(tilDiasAntes.getEditText().getText().toString());
         Log.e("TAG_", String.valueOf(Dias));
-        registrarEvento registro = new registrarEvento (evento, importancia, observacion, fechaString,nombre, Dias);
+        registrarEvento registro = new registrarEvento (evento, importancia, observacion, fechaString, nombre, Dias);
 
 
 
@@ -84,6 +84,7 @@ public class MainActivity7 extends AppCompatActivity {
             public void onClick(View view){
                 Log.d("TAG_","boton registrar");
                 GrabarEvento();
+                finish();
             }
 
         });

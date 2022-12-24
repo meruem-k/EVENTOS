@@ -1,63 +1,49 @@
 package com.example.pruebafinal;
 
+
 public class registrarEvento {
     private String evento;
     private String importancia;
     private String observacion;
-
-
-
-
     private String fechaString;
     private String nombre;
     private Integer Dias;
 
-
-    public registrarEvento(Integer dias) {
-        Dias = dias;
-    }
-
     public registrarEvento(String evento, String importancia, String observacion, String fechaString, String nombre, Integer dias) {
-
-    }
-
-    public Integer getDias() {
-        return Dias;
-    }
-
-    public void setDias(Integer dias) {
-        Dias = dias;
-    }
-
-    public registrarEvento(String nombre, String evento, String importancia, String observacion, String fechaString) {
         this.evento = evento;
         this.importancia = importancia;
         this.observacion = observacion;
         this.fechaString = fechaString;
-        this.nombre= nombre ;
-    }
-    public boolean isNull(){
-        if(evento.equals("")&& importancia.equals("")&&observacion.equals("")&&fechaString.equals("")){
-            return false;
-
-        }else{
-            return true;
-        }
+        this.nombre = nombre;
+        Dias = dias;
     }
 
+    public String getEvento() {
+        return evento;
+    }
 
-
-    //CONSTRUCTORESS
     public void setEvento(String evento) {
         this.evento = evento;
+    }
+
+    public String getImportancia() {
+        return importancia;
     }
 
     public void setImportancia(String importancia) {
         this.importancia = importancia;
     }
 
+    public String getObservacion() {
+        return observacion;
+    }
+
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getFechaString() {
+        return fechaString;
     }
 
     public void setFechaString(String fechaString) {
@@ -72,19 +58,11 @@ public class registrarEvento {
         this.nombre = nombre;
     }
 
-    public String getEvento() {
-        return evento;
+    public Integer getDias() {
+        return Dias;
     }
 
-    public String getImportancia() {
-        return importancia;
-    }
-
-    public String getObservacion() {
-        return observacion;
-    }
-
-    public String getFechaString() {
-        return fechaString;
+    public void setDias(Integer dias) {
+        Dias = dias;
     }
 }
