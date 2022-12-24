@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity6 extends AppCompatActivity {
+
+    private TextView tvBienvenido;
     private Button btnVerEventos, btnRegistrar, btnEliminarUsuario ,btnDesloguear;
 
     private void pantallaVisualizarEventos(){
@@ -36,9 +39,11 @@ public class MainActivity6 extends AppCompatActivity {
     private void referencias(){
         btnRegistrar = findViewById(R.id.btnAgregarEventos);
         btnVerEventos= findViewById(R.id.btnVerEventos);
+        tvBienvenido = findViewById(R.id.tvBienvenido);
         btnEliminarUsuario = findViewById(R.id.btnEliminaUsuario);
         btnDesloguear= findViewById(R.id.btnDesloguear);
     }
+
 
     private void eliminarcUsuario() {
         AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
@@ -89,7 +94,9 @@ public class MainActivity6 extends AppCompatActivity {
         setContentView(R.layout.activity_main6);
         referencias();
         eventos();
-        String nombre = getIntent().getExtras().getString("nombreUsuario");
+        String nombre = getIntent().getExtras().getString("nombreUsuario").toUpperCase();
+        String original = tvBienvenido.getText().toString();
+        tvBienvenido.setText(original+ nombre);
     }
 
 
