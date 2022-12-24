@@ -2,6 +2,7 @@ package com.example.pruebafinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,16 +21,28 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout tilUser, tilPassword;
     private Button btnLogin, btnRegister, btnOlvide;
     private TextView setError;
-    String user, password, pregunta, respuesta;
+    String user, password, pregunta, respuesta, last_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         referencias();
         eventos();
-    }
-//REFERENCIAS
 
+        try {
+            AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
+            SQLiteDatabase miBD = adbd.getWritableDatabase();
+            Cursor d = miBD.rawQuery("Select * from last_login", null);
+            last_user = d.getString(0);
+            miBD.close();
+            Log.d("TAG_", "" + d.getString(0));
+
+        }catch (Exception ex){
+
+        }};
+
+
+//REFERENCIA
     private void referencias(){
         tilUser = findViewById(R.id.tilUser);
         tilPassword = findViewById(R.id.tilPassword);
@@ -46,37 +59,58 @@ public class MainActivity extends AppCompatActivity {
         user = tilUser.getEditText().getText().toString();
         password = tilPassword.getEditText().getText().toString();
 
+
         try {
             AdministradorBD adbd = new AdministradorBD(this, "BDAplicacion", null, 1);
             SQLiteDatabase miBD = adbd.getWritableDatabase();
 //miBD.update("usuarios", c, "usuario=?", new String[]{nombre});
             Cursor c = miBD.rawQuery("Select * from usuarios WHERE usuario='"+user+"'", null);
 
-            if (c.moveToFirst()) {
-                Log.d("TAG_", "Registros recuperados " + c.getCount());
-                do {
-                    if
-                    (user.isEmpty() || password.isEmpty()){
-                        setError.setText("Rellene todos los campos!");
-                        setError.setTextColor(Color.parseColor("#FF0000"));
-                    }
-                    else if (user.equals(c.getString(1))  && password.equals(c.getString(2))){
-                        Toast.makeText(this, "Ingreso correcto!!", Toast.LENGTH_SHORT).show();
-                        miBD.close();
-                        Intent pantallaregistrar = new Intent(this, MainActivity6.class);
-                        pantallaregistrar.putExtra("nombreUsuario",user);
-                        startActivity(pantallaregistrar);
-                    }
-                    else if
-                    (!user.equals(c.getString(1)) || !password.equals(c.getString(2))){
-                        setError.setText("Usuario o contraseña incorrecto!");
-                        setError.setTextColor(Color.parseColor("#FF0000"));
-                    }
-                }while (c.moveToNext());
-            }
-        } catch (Exception ex) {
+
+                if (c.moveToFirst()) {
+                    Log.d("TAG_", "Registros recuperados " + c.getCount());
+                    do {
+                        if
+                        (user.isEmpty() || password.isEmpty()){
+                            setError.setText("Rellene todos los campos!");
+                            setError.setTextColor(Color.parseColor("#FF0000"));
+                        }
+                        else if (user.equals(c.getString(1))  && password.equals(c.getString(2))){
+                            if (last_user != user){
+                                ContentValues values = new ContentValues();
+                                values.put("usuario", user);
+                                miBD.update("last_login",values, "usuario=?",  new String[]{last_user});
+                                Intent pantallaregistrar = new Intent(this, MainActivity6.class);
+                                pantallaregistrar.putExtra("nombreUsuario",user);
+                                startActivity(pantallaregistrar);
+                            }else{
+
+
+
+                                Toast.makeText(this, "Ingreso correcto!!", Toast.LENGTH_SHORT).show();
+                                ContentValues values = new ContentValues();
+                                values.put("usuario", user);
+                                //miBD.insert("last_login",null, values);
+                                miBD.close();
+                                Intent pantallaregistrar = new Intent(this, MainActivity6.class);
+                                pantallaregistrar.putExtra("nombreUsuario",user);
+                                startActivity(pantallaregistrar);
+                            }
+
+                        }
+                        else if
+                        (!user.equals(c.getString(1)) || !password.equals(c.getString(2))){
+                            setError.setText("Usuario o contraseña incorrecto!");
+                            setError.setTextColor(Color.parseColor("#FF0000"));
+                        }
+                    }while (c.moveToNext());
+                }
+
+             } catch (Exception ex) {
             Log.e("TAG_", ex.toString());
-        }
+            }
+
+
     }
     private void pantallaOlvide(){
         Intent pantallaOlvide = new Intent(this,MainActivity4.class);
