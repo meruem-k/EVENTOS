@@ -7,7 +7,7 @@
     tools:context=".MainActivity4">
 
     <TextView
-        android:id="@+id/tvNuevaPass"
+        android:id="@+id/tvRecuperar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -24,12 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Para recuperar tu contraseña , deberas ingresar tu nombre de usuario , tu pregunta y respuesta secreta."
-        app:layout_constraintEnd_toEndOf="@+id/tvNuevaPass"
-        app:layout_constraintStart_toStartOf="@+id/tvNuevaPass"
-        app:layout_constraintTop_toBottomOf="@+id/tvNuevaPass" />
+        app:layout_constraintEnd_toEndOf="@+id/tvRecuperar"
+        app:layout_constraintStart_toStartOf="@+id/tvRecuperar"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecuperar" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilNewPass"
+        android:id="@+id/tilUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -49,9 +49,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/tilNewPass"
-        app:layout_constraintStart_toStartOf="@+id/tilNewPass"
-        app:layout_constraintTop_toBottomOf="@+id/tilNewPass" />
+        app:layout_constraintEnd_toEndOf="@+id/tilUsuario"
+        app:layout_constraintStart_toStartOf="@+id/tilUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/tilUsuario" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilRespuesta"
@@ -71,7 +71,7 @@
 
     <Button
         android:id="@+id/btnRecuperar"
-        android:layout_width="123dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Recuperar"
@@ -80,11 +80,19 @@
 
     <Button
         android:id="@+id/btnVolver"
-        android:layout_width="123dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Volver"
         app:layout_constraintStart_toStartOf="@+id/tilRespuesta"
         app:layout_constraintTop_toBottomOf="@+id/tilRespuesta" />
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVolver" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
